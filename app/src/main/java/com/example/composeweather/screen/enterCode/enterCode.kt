@@ -110,7 +110,7 @@ fun EnterCode() {
                         .weight(1f),
                     textAlign = TextAlign.Center
                 )
-                OTP
+                Text("fkljcd")
 
                 Image(
                     painter = painterResource(R.drawable.nextbutton),
