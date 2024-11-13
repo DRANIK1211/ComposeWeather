@@ -13,6 +13,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.composeweather.screen.enterCode.EnterCode
 import com.example.composeweather.screen.enterPassword.EnterPassword
+import com.example.composeweather.screen.registration.NewRegistration
 import com.example.composeweather.ui.theme.ComposeWeatherTheme
 
 class MainActivity : ComponentActivity() {
@@ -33,7 +34,7 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun MainScreen() {
-    EnterCode()
+    NewRegistration()
 }
 
 

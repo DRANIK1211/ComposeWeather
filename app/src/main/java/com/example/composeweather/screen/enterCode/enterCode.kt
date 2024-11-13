@@ -1,8 +1,10 @@
 package com.example.composeweather.screen.enterCode
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxHeight
@@ -12,6 +14,8 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.BasicTextField
+import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
@@ -27,11 +31,14 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.drawWithCache
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
@@ -57,33 +64,110 @@ fun EnterCode() {
             verticalArrangement = Arrangement.Center,
             ) {
             Image(
-                painter = painterResource(R.drawable.enterpassimg), contentDescription = null,
+                painter = painterResource(R.drawable.phonenumberimg1), contentDescription = null,
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(300.dp)
             )
             Text(
-                "Enter the password",
+                "Enter Verification Code",
                 modifier = Modifier.padding(15.dp),
                 fontSize = 20.sp,
                 color = Color(55, 71, 79),
                 fontWeight = FontWeight.Medium
             )
             Text(
-                "It looks like you already have an account in this number. Please enter the password to proceed",
-                modifier = Modifier.padding(15.dp),
+                "We have sent SMS to:",
+                modifier = Modifier.padding(start = 15.dp, top = 10.dp, bottom = 7.dp),
                 fontSize = 14.sp,
                 color = Color(55, 71, 79, 183),
-                fontWeight = FontWeight.Medium
-            )
-            Text(
-                text = "Forgot  Password?",
-                color = Color(243, 122, 32),
-                modifier = Modifier
-                    .padding(start = 16.dp, top = 35.dp),
-                fontSize = 14.sp,
                 fontWeight = FontWeight(400)
             )
+            Text(
+                "01XXXXXXXXXX",
+                modifier = Modifier.padding(start = 15.dp,),
+                fontSize = 16.sp,
+                color = Color(55, 71, 79),
+                fontWeight = FontWeight(700)
+            )
+            Row(
+                modifier = Modifier.fillMaxWidth()
+                    .padding(start = 16.dp, top = 35.dp, end = 24.dp),
+                horizontalArrangement = Arrangement.SpaceBetween,
+                verticalAlignment = Alignment.CenterVertically,
+
+                ){
+                Text(
+                    text = "Resend OTP",
+                    color = Color(243, 122, 32),
+                    modifier = Modifier,
+                    fontSize = 14.sp,
+                    fontWeight = FontWeight(400)
+                )
+                Text(
+                    text = "Change Phone Number",
+                    color = Color(55, 71, 79, 183),
+                    modifier = Modifier,
+                    fontSize = 14.sp,
+                    fontWeight = FontWeight(400)
+                )
+            }
+            var OtpText by remember {
+                mutableStateOf("")
+            }
+            BasicTextField(
+                value = OtpText,
+                onValueChange = {
+                    if(it.length <= 5){
+                        OtpText = it
+                    }
+                },
+                modifier = Modifier.fillMaxWidth()
+                    .padding(top = 35.dp, start = 24.dp, end = 24.dp),
+                keyboardOptions = KeyboardOptions(
+                    capitalization = KeyboardCapitalization.Characters,
+                    keyboardType = KeyboardType.Number
+                )
+            ){
+                Row (horizontalArrangement = Arrangement.SpaceBetween){
+                    repeat(5) { index ->
+                        val number = when {
+                            index >= OtpText.length -> ""
+                            else -> OtpText[index]
+                        }
+
+                        Column(
+                            verticalArrangement = Arrangement.Center,
+                            horizontalAlignment = Alignment.CenterHorizontally
+                        ) {
+                            Box(
+                                modifier = Modifier
+                                    .width(56.dp)
+                                    .height(56.dp)
+                                    .clip(
+                                        shape = RoundedCornerShape(8.dp)
+                                    )
+                                    .background(Color(240, 241, 242))
+                                    ,
+
+                            ){
+                                Box(
+                                    contentAlignment = Alignment.Center,
+                                    modifier = Modifier.fillMaxSize()
+                                ){
+                                    Text(
+                                        text = number.toString(),
+                                        fontSize = 20.sp,
+                                        fontWeight = FontWeight(500)
+                                    )
+                                }
+
+                            }
+                        }
+                    }
+                }
+            }
+
         }
         Button(
             onClick = {},
@@ -102,7 +186,7 @@ fun EnterCode() {
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Text(
-                    text = "Submit",
+                    text = "Next",
                     fontSize = 16.sp,
                     fontWeight = FontWeight(500),
                     modifier = Modifier
@@ -110,8 +194,6 @@ fun EnterCode() {
                         .weight(1f),
                     textAlign = TextAlign.Center
                 )
-                Text("fkljcd")
-
                 Image(
                     painter = painterResource(R.drawable.nextbutton),
                     contentDescription = null,
