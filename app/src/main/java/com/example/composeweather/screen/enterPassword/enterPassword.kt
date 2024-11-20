@@ -18,6 +18,7 @@ import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextFieldColors
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -136,10 +137,11 @@ fun EnterPassword() {
 
                 },
                 colors = TextFieldDefaults.outlinedTextFieldColors(
-                    containerColor = Color(240, 241, 242),
                     focusedBorderColor = Color(240, 241, 242),
-                    unfocusedBorderColor = Color(240, 241, 242)
+                    unfocusedBorderColor = Color(240, 241, 242),
+                    containerColor = Color(240, 241, 242)
                 )
+
             )
             Text(
                 text = "Forgot  Password?",
