@@ -40,7 +40,7 @@ fun HistoryOrders(mas: List<OrderItem>) :Unit{
             .padding(start = 16.dp, end = 16.dp),
     ){
 
-        items(orders){ item ->
+        items(mas){ item ->
             Row(
                 modifier = Modifier.fillMaxWidth()
                     .padding(top = 21.dp),
